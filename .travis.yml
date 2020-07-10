@@ -1,14 +1,17 @@
 language: node_js:
+addons:
+  sonarcloud:
+    organization: "jakubmroczek"
+    token:
+      secure: $SONAR_TOKEN  
 node_js:
   - "12.10"
-before_install:
-  - cd ./api
-  - npm install
-  - npm test
-  - npm run build
-  - cd ./ui
-  - npm install
-  - npm test
-  - npm run build
-on:
-  branch: master
+cache:
+  directories:
+    - "node_modules"
+jobs:
+  include:
+  - stage: "Run Tests & SonarCloud Analysis"
+    script:
+      - npm test
+      - sonar-scanner -Dsonar.projectKey=$SONAR_PROJECT_KEY

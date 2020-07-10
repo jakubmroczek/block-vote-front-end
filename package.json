@@ -13,7 +13,9 @@
     "#lint": "Runs ESLint on all relevant files",
     "lint": "eslint . --ext js,jsx --ignore-pattern public",
     "#lint-fix": "Runs ESLint on all relevant files with auto-fixing",
-    "lint-fix": "eslint . --ext js,jsx --ignore-pattern public --fix"
+    "lint-fix": "eslint . --ext js,jsx --ignore-pattern public --fix",
+    "test": "NODE_ENV=test jest",
+    "coverage": "jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -39,6 +41,7 @@
     "ethereumjs-tx": "^2.1.2",
     "express": "^4.17.1",
     "http-proxy-middleware": "^0.21.0",
+    "jest": "^26.1.0",
     "jquery": "^3.5.1",
     "nodemon": "^1.19.4",
     "npm": "^6.14.5",
