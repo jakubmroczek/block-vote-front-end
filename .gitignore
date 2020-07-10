@@ -1,0 +1,6 @@
+*.bundle.js
+*.bundle.js.map
+build
+node_modules/
+.vscode
+.env

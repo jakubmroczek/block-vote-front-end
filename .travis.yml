@@ -1,0 +1,14 @@
+language: node_js:
+node_js:
+  - "12.10"
+before_install:
+  - cd ./api
+  - npm install
+  - npm test
+  - npm run build
+  - cd ./ui
+  - npm install
+  - npm test
+  - npm run build
+on:
+  branch: master
