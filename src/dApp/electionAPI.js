@@ -58,10 +58,7 @@ export default class ElectionAPI {
     const { abi, address } = smartContract;
     const contractABI = JSON.parse(abi);
 
-    // TODO: Get this from the metamask
-    const web3 = new Web3('http://localhost:8545');
-
-    const dapptokenContract = new web3.eth.Contract(contractABI, address);
+    const dapptokenContract = new this.web3.eth.Contract(contractABI, address);
     this.electionInstance = dapptokenContract;
   }
 
