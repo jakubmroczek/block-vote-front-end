@@ -41,8 +41,18 @@ function CreateElectionItem({ onElectionCreated }) {
 
   return (
     <>
-      <h1>You have no election here mate!</h1>
-      <Button onClick={createElection}>Create one!</Button>
+      <Container className="mt-3 text-center">
+        <Row>
+          <Col className="mt-3" style={{ fontSize: 20 }}>
+            Currently you do not have any election
+          </Col>
+        </Row>
+        <Row className="mt-3">
+          <Col>
+            <Button onClick={createElection} variant="outline-success">Create one</Button>
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 }
