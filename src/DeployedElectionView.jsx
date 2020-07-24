@@ -55,9 +55,11 @@ export default class DeployedElectionView extends React.Component {
       const response = await graphQLFetch(query, { id });
 
       if (response) {
-        alert('Finished the election success');
+        // Invoking parent comopnetn callback
+        const { callback } = this.props;
+        callback();
       } else {
-        alert('Finished the election failure');
+        alert('Could not finish the election');
       }
     };
 

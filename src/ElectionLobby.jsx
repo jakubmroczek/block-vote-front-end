@@ -125,13 +125,12 @@ export default class ElectionLobby extends React.Component {
     }`;
     const data = await graphQLFetch(query, { address });
 
-    alert(JSON.stringify(data));
-
     if (data) {
-      // TODO: Better error handling
-      alert('Successful deployment!!');
+      // Invoking parent comopnetn callback
+      const { callback } = this.props;
+      callback();
     } else {
-      alert('Could not deploy the smart contract');
+      alert('Could not deploy the smart contract on the blockchain');
     }
   }
 
