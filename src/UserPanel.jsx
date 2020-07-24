@@ -109,10 +109,13 @@ export default class UserPanel extends React.Component {
 
     // TODO: Refactor this code
     // TODO: What does this logic means?
-    if (status === 'New' ||
-       status === 'Finished') {
+    if (status === 'New'
+       || status === 'Finished') {
       return (
-        <ElectionSetUpPanel id={id} />
+        <ElectionSetUpPanel
+          id={id}
+          callback={this.read}
+        />
       );
     }
 

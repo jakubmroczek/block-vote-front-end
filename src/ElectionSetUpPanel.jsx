@@ -83,11 +83,9 @@ export default class ElectionSetUpPanel extends React.Component {
     const response = await graphQLFetch(query, vars);
 
     if (response) {
-      const { history } = this.props;
-      history.push('/panel/lobby');
-
-      // TODO: We must somehow update the state of a parent component.
-      // TODO: How should we apporach this?
+      // Invoking parent comopnetn callback
+      const { callback } = this.props;
+      callback();
     } else {
       alert('Could not go with the election to the further stage');
     }
