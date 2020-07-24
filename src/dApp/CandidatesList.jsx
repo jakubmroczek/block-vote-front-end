@@ -81,7 +81,7 @@ export default class CandidatesList extends React.Component {
 
     return (
       <>
-        <Table bordered condensed hover responsive className="text-left">
+        <Table bordered condensed hover responsive className="text-centre">
           <tbody>
             {rows}
           </tbody>

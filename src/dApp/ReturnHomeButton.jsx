@@ -6,7 +6,7 @@ export default function ReturnHomeButton() {
   return (
     <LinkContainer to="/">
       <Button variant="outline-success">
-        Home page
+        Home
       </Button>
     </LinkContainer>
   );

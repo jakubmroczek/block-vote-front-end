@@ -12,7 +12,7 @@ function ElectionRow({ election, onElectionRowClick }) {
         <td>{title}</td>
         <td>
           {' '}
-          <Button onClick={vote}>Vote</Button>
+          <Button variant="secondary" onClick={vote}>Vote</Button>
           {' '}
         </td>
       </tr>
@@ -31,7 +31,7 @@ function ElectionTable({ elections, onElectionRowClick }) {
     ));
 
   return (
-    <Table bordered condensed hover responsive className="text-left">
+    <Table bordered condensed hover responsive className="text-centre">
       <tbody>
         {rows}
       </tbody>
