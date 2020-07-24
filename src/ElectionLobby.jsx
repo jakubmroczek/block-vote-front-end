@@ -118,29 +118,20 @@ export default class ElectionLobby extends React.Component {
     return result;
   }
 
-  async update(address) {
-    // TODO: Do not resend ABI, change it on the backend.
-    // TODO: fetch something meaningful from the backen
+  async startElection(address) {
     const query = `mutation 
-        updateElection($id: ID!, $changes: ElectionUpdateInputs!) {
-          updateElection(id: $id, changes: $changes) {
-                  title
-                }
+    startElection($address: String!) {
+      startElection(address: $address) 
     }`;
-    const { id } = this.props;
+    const data = await graphQLFetch(query, { address });
 
-    // TODO: Do not do this, change backend logic
-    const { smartContract: sm } = this.state;
-    const { bytecode, abi } = sm;
+    alert(JSON.stringify(data));
 
-    const smartContract = { address, bytecode, abi };
-    const changes = { status: 'Deployed', smartContract };
-    const vars = { id, changes };
-    const data = await graphQLFetch(query, vars);
     if (data) {
+      // TODO: Better error handling
       alert('Successful deployment!!');
     } else {
-      alert('Could deploy the smart contract}');
+      alert('Could not deploy the smart contract');
     }
   }
 
@@ -180,7 +171,7 @@ export default class ElectionLobby extends React.Component {
         deploy(bytecode, abi, title, candidates, publicKeys, account, this.web3)
           .then((newContractInstance) => {
             const contractAddress = newContractInstance.options.address;
-            this.update(contractAddress);
+            this.startElection(contractAddress);
           }).error((err) => {
             console.log(err);
           });
