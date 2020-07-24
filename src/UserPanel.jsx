@@ -2,25 +2,11 @@ import React from 'react';
 import {
   Button, Spinner, Container, Row, Col,
 } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
-import { withRouter } from 'react-router-dom';
 import graphQLFetch from './graphQLFetch.js';
 import ElectionLobby from './ElectionLobby.jsx';
 import DeployedElectionView from './DeployedElectionView.jsx';
 import UserContext from './UserContext.js';
-
-const EditElectionInfo = withRouter(({ id, location: { search } }) => {
-  const editLocation = { pathname: `/panel/edit/${id}`, search };
-
-  return (
-    <>
-      <h1>You created an election, but did not finish editing it! Edit!</h1>
-      <LinkContainer to={editLocation}>
-        <Button>Edit!</Button>
-      </LinkContainer>
-    </>
-  );
-});
+import ElectionSetUpPanel from './ElectionSetUpPanel.jsx';
 
 function CreateElectionItem({ onElectionCreated }) {
   const createElection = async () => {
@@ -122,15 +108,11 @@ export default class UserPanel extends React.Component {
     const { id, status } = election;
 
     // TODO: Refactor this code
-    if (status === 'Finished') {
+    // TODO: What does this logic means?
+    if (status === 'New' ||
+       status === 'Finished') {
       return (
-        <EditElectionInfo id={id} />
-      );
-    }
-
-    if (status === 'New') {
-      return (
-        <EditElectionInfo id={id} />
+        <ElectionSetUpPanel id={id} />
       );
     }
 

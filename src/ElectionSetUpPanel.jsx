@@ -12,10 +12,10 @@ export default class ElectionSetUpPanel extends React.Component {
   constructor(props) {
     super(props);
 
-    const { match: { params: { electionID } } } = this.props;
+    const { id } = this.props;
 
     this.state = {
-      id: electionID,
+      id,
       title: '',
       candidates: [],
       participants: [],
@@ -86,6 +86,7 @@ export default class ElectionSetUpPanel extends React.Component {
       const { history } = this.props;
       history.push('/panel/lobby');
 
+      // TODO: We must somehow update the state of a parent component.
       // TODO: How should we apporach this?
     } else {
       alert('Could not go with the election to the further stage');

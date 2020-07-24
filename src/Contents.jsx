@@ -34,7 +34,6 @@ export default class Contents extends React.Component {
             )}
           />
           <Route exact path="/panel" component={UserPanel} />
-          <Route path="/panel/edit/:electionID" component={ElectionSetUpPanel} />
           <Route exact path="/vote" component={DApp} />
           <Route exact path="/vote/:electionID" component={Election} />
           <Route path="/register/:electionID" component={RegisterPublicKeyPanel} />
