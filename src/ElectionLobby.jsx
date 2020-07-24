@@ -195,23 +195,25 @@ export default class ElectionLobby extends React.Component {
     const { totalNumberOfVoters } = this.props;
 
     return (
-      <Container>
-        <Row>
+      <Container className="mt-3 text-center">
+         <Row className="mt-3 text-centre" style={{ fontSize: 20 }}>
+          <Col>
+            Registered users
+            {' '}
+            {registeredUserNumber}
+            /
+            {totalNumberOfVoters}
+          </Col>
+        </Row>
+         <Row className="mt-3">
           <Col>
             <Spinner animation="border" />
           </Col>
         </Row>
-        <Row>
-          Registered users
-          {' '}
-          {registeredUserNumber}
-          /
-          {totalNumberOfVoters}
-        </Row>
-        <Row>
+        <Row className="mt-5">
           <Col>
-            <Button onClick={this.deployElection}>
-              Deploy election on blockchain
+            <Button onClick={this.deployElection} variant="outline-success">
+              Start the election
             </Button>
           </Col>
         </Row>
