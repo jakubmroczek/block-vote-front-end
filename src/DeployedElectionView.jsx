@@ -1,5 +1,7 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import {
+  Button, Container, Row, Col, Spinner,
+} from 'react-bootstrap';
 import graphQLFetch from './graphQLFetch.js';
 
 // TODO: Rename this, I do not have a better name right now
@@ -13,7 +15,7 @@ export default function DeployedElectionView({ id }) {
         }`;
 
     const response = await graphQLFetch(query, { id });
-    
+
     if (response) {
       alert('Finished the election success');
     } else {
@@ -22,14 +24,31 @@ export default function DeployedElectionView({ id }) {
   };
 
   return (
-    <>
-      <h1>Election successfully deployed on the blockchain</h1>
-      <Button
-        variant="outline-success"
-        onClick={onElectionFinish}
-      >
-        Finish the election
-      </Button>
-    </>
+    <Container className="mt-3 text-center">
+      <Row className="mt-3 text-centre" style={{ fontSize: 20 }}>
+        <Col>
+          The election is in progress. Number of a casted votes:
+          {' '}
+          ?
+          /
+          ?
+        </Col>
+      </Row>
+      <Row className="mt-3">
+        <Col>
+          <Spinner animation="border" />
+        </Col>
+      </Row>
+      <Row className="mt-5">
+        <Col>
+          <Button
+            variant="outline-success"
+            onClick={onElectionFinish}
+          >
+            End the election
+          </Button>
+        </Col>
+      </Row>
+    </Container>
   );
 }
