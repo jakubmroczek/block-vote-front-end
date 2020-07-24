@@ -108,6 +108,38 @@ export default class ElectionAPI {
       });
   }
 
+  async getNumberOfCastedVotes(id) {
+    // TODO: Encapsulate this into distinct function
+    await this.metaMaskInit();
+    const response = await this.fetchCompiledSmartContract(id);
+
+    if (response === undefined) {
+      onFailure();
+      return;
+    }
+
+    await this.blockchainInit(response);
+
+    // TODO: Rename the function in the blockchain
+    return this.electionInstance.methods.getNumberOfCastedVotes().call(result => result);
+  }
+
+  async getNumberOfEligibleVoters(id) {
+     // TODO: Encapsulate this into distinct function
+     await this.metaMaskInit();
+     const response = await this.fetchCompiledSmartContract(id);
+ 
+     if (response === undefined) {
+       onFailure();
+       return;
+     }
+ 
+     await this.blockchainInit(response);
+ 
+     // TODO: Rename the function in the blockchain
+     return this.electionInstance.methods.getNumberOfEligibleVoters().call(result => result);
+  }
+
   async vote(id, candidate) {
     // TODO: Encapsulate this in a function and call only once
     await this.metaMaskInit();
