@@ -118,29 +118,19 @@ export default class ElectionLobby extends React.Component {
     return result;
   }
 
-  async update(address) {
-    // TODO: Do not resend ABI, change it on the backend.
-    // TODO: fetch something meaningful from the backen
+  async startElection(address) {
     const query = `mutation 
-        updateElection($id: ID!, $changes: ElectionUpdateInputs!) {
-          updateElection(id: $id, changes: $changes) {
-                  title
-                }
+    startElection($address: String!) {
+      startElection(address: $address) 
     }`;
-    const { id } = this.props;
+    const data = await graphQLFetch(query, { address });
 
-    // TODO: Do not do this, change backend logic
-    const { smartContract: sm } = this.state;
-    const { bytecode, abi } = sm;
-
-    const smartContract = { address, bytecode, abi };
-    const changes = { status: 'Deployed', smartContract };
-    const vars = { id, changes };
-    const data = await graphQLFetch(query, vars);
     if (data) {
-      alert('Successful deployment!!');
+      // Invoking parent comopnetn callback
+      const { callback } = this.props;
+      callback();
     } else {
-      alert('Could deploy the smart contract}');
+      alert('Could not deploy the smart contract on the blockchain');
     }
   }
 
@@ -180,7 +170,7 @@ export default class ElectionLobby extends React.Component {
         deploy(bytecode, abi, title, candidates, publicKeys, account, this.web3)
           .then((newContractInstance) => {
             const contractAddress = newContractInstance.options.address;
-            this.update(contractAddress);
+            this.startElection(contractAddress);
           }).error((err) => {
             console.log(err);
           });
@@ -195,23 +185,25 @@ export default class ElectionLobby extends React.Component {
     const { totalNumberOfVoters } = this.props;
 
     return (
-      <Container>
-        <Row>
+      <Container className="mt-3 text-center">
+         <Row className="mt-3 text-centre" style={{ fontSize: 20 }}>
+          <Col>
+            Registered users
+            {' '}
+            {registeredUserNumber}
+            /
+            {totalNumberOfVoters}
+          </Col>
+        </Row>
+         <Row className="mt-3">
           <Col>
             <Spinner animation="border" />
           </Col>
         </Row>
-        <Row>
-          Registered users
-          {' '}
-          {registeredUserNumber}
-          /
-          {totalNumberOfVoters}
-        </Row>
-        <Row>
+        <Row className="mt-5">
           <Col>
-            <Button onClick={this.deployElection}>
-              Deploy election on blockchain
+            <Button onClick={this.deployElection} variant="outline-success">
+              Start the election
             </Button>
           </Col>
         </Row>

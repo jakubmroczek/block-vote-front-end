@@ -2,25 +2,11 @@ import React from 'react';
 import {
   Button, Spinner, Container, Row, Col,
 } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
-import { withRouter } from 'react-router-dom';
 import graphQLFetch from './graphQLFetch.js';
 import ElectionLobby from './ElectionLobby.jsx';
 import DeployedElectionView from './DeployedElectionView.jsx';
 import UserContext from './UserContext.js';
-
-const EditElectionInfo = withRouter(({ id, location: { search } }) => {
-  const editLocation = { pathname: `/panel/edit/${id}`, search };
-
-  return (
-    <>
-      <h1>You created an election, but did not finish editing it! Edit!</h1>
-      <LinkContainer to={editLocation}>
-        <Button>Edit!</Button>
-      </LinkContainer>
-    </>
-  );
-});
+import ElectionSetUpPanel from './ElectionSetUpPanel.jsx';
 
 function CreateElectionItem({ onElectionCreated }) {
   const createElection = async () => {
@@ -41,8 +27,18 @@ function CreateElectionItem({ onElectionCreated }) {
 
   return (
     <>
-      <h1>You have no election here mate!</h1>
-      <Button onClick={createElection}>Create one!</Button>
+      <Container className="mt-3 text-center">
+        <Row>
+          <Col className="mt-3" style={{ fontSize: 20 }}>
+            Currently you do not have any election
+          </Col>
+        </Row>
+        <Row className="mt-3">
+          <Col>
+            <Button onClick={createElection} variant="outline-success">Create one</Button>
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 }
@@ -112,28 +108,27 @@ export default class UserPanel extends React.Component {
     const { id, status } = election;
 
     // TODO: Refactor this code
-    if (status === 'Finished') {
+    // TODO: What does this logic means?
+    if (status === 'New'
+       || status === 'Finished') {
       return (
-        <EditElectionInfo id={id} />
-      );
-    }
-
-    if (status === 'New') {
-      return (
-        <EditElectionInfo id={id} />
+        <ElectionSetUpPanel
+          id={id}
+          callback={this.read}
+        />
       );
     }
 
     const { participants } = election;
     if (status === 'Registration') {
       return (
-        <ElectionLobby id={id} totalNumberOfVoters={participants.length} />
+        <ElectionLobby id={id} totalNumberOfVoters={participants.length} callback={this.read} />
       );
     }
 
     // Election must be deployed, no other option
     return (
-      <DeployedElectionView id={id} />
+      <DeployedElectionView id={id} callback={this.read} />
     );
   }
 }

@@ -12,10 +12,10 @@ export default class ElectionSetUpPanel extends React.Component {
   constructor(props) {
     super(props);
 
-    const { match: { params: { electionID } } } = this.props;
+    const { id } = this.props;
 
     this.state = {
-      id: electionID,
+      id,
       title: '',
       candidates: [],
       participants: [],
@@ -83,10 +83,9 @@ export default class ElectionSetUpPanel extends React.Component {
     const response = await graphQLFetch(query, vars);
 
     if (response) {
-      const { history } = this.props;
-      history.push('/panel/lobby');
-
-      // TODO: How should we apporach this?
+      // Invoking parent comopnetn callback
+      const { callback } = this.props;
+      callback();
     } else {
       alert('Could not go with the election to the further stage');
     }
