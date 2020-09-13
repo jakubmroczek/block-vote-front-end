@@ -1,10 +1,3 @@
-const dateRegex = new RegExp('^\\d\\d\\d\\d-\\d\\d-\\d\\d');
-// TODO: Remove me
-function jsonDateReviver(key, value) {
-  if (dateRegex.test(value)) return new Date(value);
-  return value;
-}
-
 export default async function graphQLFetch(query, variables = {}, showError = null) {
   try {
     const response = await fetch(window.ENV.UI_API_ENDPOINT, {
@@ -14,7 +7,7 @@ export default async function graphQLFetch(query, variables = {}, showError = nu
     });
 
     const body = await response.text();
-    const result = JSON.parse(body, jsonDateReviver);
+    const result = JSON.parse(body);
 
     if (result.errors) {
       const error = result.errors[0];

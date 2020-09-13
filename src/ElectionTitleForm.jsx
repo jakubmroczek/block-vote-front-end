@@ -29,28 +29,27 @@ function CommonModal({ placeholder, modalTitle, show, onHide, onSubmit }) {
         centered
       >
         <Modal.Header closeButton>
-          {/* TODO: edit is also possible */}
-      <Modal.Title>{modalTitle}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form name="title">
-            <FormGroup>
-              <Form.Label>Title:</Form.Label>
-              <Form.Control name="titleControl" placeholder={placeholder} value={newTitle} onChange={e => setNewTitle(e.target.value)} autoFocus />
-            </FormGroup>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button
-            type="button"
-            onClick={onClick}
-            variant="outline-success"
-          >
-            Submit
-          </Button>
-          {' '}
-          <Button onClick={onHide} variant="outline-dark">Cancel</Button>
-        </Modal.Footer>
+        <Modal.Title>{modalTitle}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form name="title">
+              <FormGroup>
+                <Form.Label>Title:</Form.Label>
+                <Form.Control name="titleControl" placeholder={placeholder} value={newTitle} onChange={e => setNewTitle(e.target.value)} autoFocus />
+              </FormGroup>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              type="button"
+              onClick={onClick}
+              variant="outline-success"
+            >
+              Submit
+            </Button>
+            {' '}
+            <Button onClick={onHide} variant="outline-dark">Cancel</Button>
+          </Modal.Footer>
       </Modal>
     </React.Fragment>
   );
@@ -152,13 +151,11 @@ export default class ElectionTitleForm extends React.Component {
         <Card className="text-center mt-2 mr-3">
           <Card.Header as="h5">Title</Card.Header>
           <Card.Body>
-            {/* TODO: Create a reusable component */}
             <OverlayTrigger
               placement="top"
               delay={{ show: 250 }}
               overlay={renderAddTooltip}
             >
-              {/* Wyswietl modal */}
               <Button onClick={this.showModal} variant="secondary">
                 {' '}
                 <FontAwesomeIcon icon={faPlus} />

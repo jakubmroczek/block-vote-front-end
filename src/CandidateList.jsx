@@ -57,7 +57,6 @@ function CandidateEditModal({
     };
 
     const updatedCandidate = Object.assign(candidate, changes);
-    // TODO: Different name
     handleEdit(index, updatedCandidate);
   };
 
@@ -345,13 +344,11 @@ export default class CandidateList extends React.Component {
             update={this.update}
             remove={this.remove}
           />
-          {/* TODO: Create a reusable component */}
           <OverlayTrigger
             placement="top"
             delay={{ show: 250 }}
             overlay={renderAddTooltip}
           >
-            {/* Wyswietl modal */}
             <Button onClick={this.showCandidateAddModal} variant="secondary">
               <FontAwesomeIcon icon={faPlus} />
             </Button>

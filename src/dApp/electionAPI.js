@@ -9,8 +9,7 @@ export default class ElectionAPI {
   electionInstance = null;
 
   async metaMaskInit() {
-    // TODO: What does Modern means?
-    // Modern dapp browsers...
+    // Modern dapp browsers
     if (window.ethereum) {
       this.web3Provider = window.ethereum;
       try {
@@ -18,7 +17,6 @@ export default class ElectionAPI {
         await window.ethereum.enable();
       } catch (error) {
         // User denied account access...
-        // TODO: Beter error handling
         console.error('User denied account access');
       }
     } else if (window.web3) {
@@ -30,7 +28,6 @@ export default class ElectionAPI {
     this.web3 = new Web3(this.web3Provider);
   }
 
-  // TODO: Make this dependant on the public key
   // eslint-disable-next-line class-methods-use-this
   async fetchCompiledSmartContract(id) {
     const query = `query 
@@ -52,7 +49,6 @@ export default class ElectionAPI {
     return undefined;
   }
 
-  // TODO: Better describtion response from the backend
   async blockchainInit(response) {
     const { smartContract } = response;
     const { abi, address } = smartContract;
@@ -78,11 +74,8 @@ export default class ElectionAPI {
 
     await this.blockchainInit(response);
 
-    // TODO: Error handling
-    // TOOD: rename to promise
     const candidates = this.electionInstance.methods.getCandidates().call();
 
-    // TODO: Error handling
     const electionTitle = this.electionInstance.methods.getTitle().call();
 
     return Promise.all([candidates, electionTitle])
@@ -106,7 +99,6 @@ export default class ElectionAPI {
   }
 
   async getNumberOfCastedVotes(id) {
-    // TODO: Encapsulate this into distinct function
     await this.metaMaskInit();
     const response = await this.fetchCompiledSmartContract(id);
 
@@ -117,12 +109,10 @@ export default class ElectionAPI {
 
     await this.blockchainInit(response);
 
-    // TODO: Rename the function in the blockchain
     return this.electionInstance.methods.getNumberOfCastedVotes().call(result => result);
   }
 
   async getNumberOfEligibleVoters(id) {
-     // TODO: Encapsulate this into distinct function
      await this.metaMaskInit();
      const response = await this.fetchCompiledSmartContract(id);
  
@@ -133,12 +123,10 @@ export default class ElectionAPI {
  
      await this.blockchainInit(response);
  
-     // TODO: Rename the function in the blockchain
      return this.electionInstance.methods.getNumberOfEligibleVoters().call(result => result);
   }
 
   async vote(id, candidate) {
-    // TODO: Encapsulate this in a function and call only once
     await this.metaMaskInit();
     const publicKey = window.web3.eth.defaultAccount;
     const response = await this.fetchCompiledSmartContract(id);
@@ -149,7 +137,6 @@ export default class ElectionAPI {
   }
 
   async isUserRegistered(id, onFailure) {
-    // TODO: Encapsulate this into distinct function
     await this.metaMaskInit();
     const response = await this.fetchCompiledSmartContract(id);
 
@@ -160,12 +147,10 @@ export default class ElectionAPI {
 
     await this.blockchainInit(response);
 
-    // TODO: Rename the function in the blockchain
     return this.electionInstance.methods.isVoterRegistered(window.web3.eth.defaultAccount).call(result => result);
   }
 
   async hasUserAlreadyVoted(id, onFailure) {
-    // TODO: Encapsulate this into distinct function
     await this.metaMaskInit();
     const response = await this.fetchCompiledSmartContract(id);
 
@@ -176,7 +161,6 @@ export default class ElectionAPI {
 
     await this.blockchainInit(response);
 
-    // TODO: Rename the function in the blockchain
     return this.electionInstance.methods.hasVoterAlreadyVoted(window.web3.eth.defaultAccount).call()
       .then(res => res);
   }

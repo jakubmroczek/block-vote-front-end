@@ -1,4 +1,3 @@
-// TODO: Rename this
 export default function deploy(bytecode, abi, title, candidates, publicKeys, account, web3) {
   const electionContract = new web3.eth.Contract(abi);
 

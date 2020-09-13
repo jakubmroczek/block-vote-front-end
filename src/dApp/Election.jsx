@@ -14,7 +14,6 @@ function ElectionTitle({ title }) {
 }
 
 export default class Election extends React.Component {
-  // TODO: Move error to distinc class/function
   unregisterdVoterErrorTitle = 'Unregistered public key'
 
   unregisterdVoterErrorMessage = 'Sorry but your public key was not recognized'
@@ -36,7 +35,6 @@ export default class Election extends React.Component {
   componentDidMount() {
     this.setState({ electionState: 'connectingToBlockchain' });
     const onFailure = () => {
-      // TODO: add a new flag for the problem
       this.setState({ electionState: 'unregisteredUser' });
     };
 
@@ -47,7 +45,6 @@ export default class Election extends React.Component {
       new ElectionAPI().hasUserAlreadyVoted(electionID, onFailure),
     ];
 
-    // TODO: Error handling
     Promise.all(successfulConnectionConditions)
       .then((values) => {
         const isUserRegistered = values[0];
@@ -58,8 +55,6 @@ export default class Election extends React.Component {
         } else if (userVoted) {
           this.setState({ electionState: 'userHasAlreadyVoted' });
         } else {
-          // TODO: BEtter error handling
-          // TODO: Rename the getElection to getDeployedElection or getSmartContract
           new ElectionAPI()
             .getElection(electionID, onFailure)
             .then((election) => {
@@ -81,12 +76,6 @@ export default class Election extends React.Component {
   }
 
   render() {
-    // TODO: The name valid is stupid change it
-    // TODO: Handle the MetaMask error
-
-    // TODO: Refactor the state, let it hold a flag indicating wether it is okay and not
-    // move the messages to the reducer
-    // TODO: Handle nulls for titile and candidates
     const {
       electionID, electionState, title, candidates,
     } = this.state;

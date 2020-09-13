@@ -107,8 +107,6 @@ export default class UserPanel extends React.Component {
 
     const { id, status } = election;
 
-    // TODO: Refactor this code
-    // TODO: What does this logic means?
     if (status === 'New'
        || status === 'Finished') {
       return (
@@ -126,7 +124,6 @@ export default class UserPanel extends React.Component {
       );
     }
 
-    // Election must be deployed, no other option
     return (
       <DeployedElectionView id={id} callback={this.read} />
     );

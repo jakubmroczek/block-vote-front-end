@@ -7,7 +7,6 @@ import ParticipantList from './ParticipantList.jsx';
 
 import graphQLFetch from './graphQLFetch.js';
 
-// TODO: Make it fucntional
 export default class ElectionSetUpPanel extends React.Component {
   constructor(props) {
     super(props);
@@ -83,7 +82,7 @@ export default class ElectionSetUpPanel extends React.Component {
     const response = await graphQLFetch(query, vars);
 
     if (response) {
-      // Invoking parent comopnetn callback
+      // Invoking parent component callback
       const { callback } = this.props;
       callback();
     } else {

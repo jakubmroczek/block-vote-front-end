@@ -5,8 +5,6 @@ import {
 import graphQLFetch from './graphQLFetch.js';
 import ElectionAPI from './dApp/electionAPI.js';
 
-// TODO: Rename this, I do not have a better name right now
-// TODO: Improve the code quality.
 export default class DeployedElectionView extends React.Component {
   constructor(props) {
     super(props);
@@ -45,8 +43,6 @@ export default class DeployedElectionView extends React.Component {
     const { id } = this.props;
 
     const onElectionFinish = async () => {
-      // TODO: Ask the user if he really wants to do this
-      // TODO: Check if the graph ql query syntax can be shorter
       const query = `mutation 
           finishElection {
               finishElection
@@ -55,7 +51,6 @@ export default class DeployedElectionView extends React.Component {
       const response = await graphQLFetch(query, { id });
 
       if (response) {
-        // Invoking parent comopnetn callback
         const { callback } = this.props;
         callback();
       } else {

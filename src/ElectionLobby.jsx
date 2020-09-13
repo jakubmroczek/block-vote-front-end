@@ -6,7 +6,6 @@ import graphQLFetch from './graphQLFetch.js';
 
 import deploy from './deploy.js';
 
-// TODO: Is this okay in the react?
 const Web3 = require('web3');
 
 export default class ElectionLobby extends React.Component {
@@ -38,7 +37,6 @@ export default class ElectionLobby extends React.Component {
     clearInterval(this.timer);
   }
 
-  // TODO: Keep this in a one place
   async read() {
     const query = `query 
     getUserElection {
@@ -102,7 +100,6 @@ export default class ElectionLobby extends React.Component {
     }
   }
 
-  // TODO: Move to the state
   bytecodeObject() {
     const { smartContract } = this.state;
     const { bytecode } = smartContract;
@@ -110,7 +107,6 @@ export default class ElectionLobby extends React.Component {
     return `0x${object}`;
   }
 
-  // TODO: Move to the state
   abi() {
     const { smartContract } = this.state;
     const { abi } = smartContract;
@@ -126,7 +122,6 @@ export default class ElectionLobby extends React.Component {
     const data = await graphQLFetch(query, { address });
 
     if (data) {
-      // Invoking parent comopnetn callback
       const { callback } = this.props;
       callback();
     } else {
@@ -135,8 +130,6 @@ export default class ElectionLobby extends React.Component {
   }
 
   async metaMaskInit() {
-    // TODO: What does Modern means?
-    // Modern dapp browsers...
     if (window.ethereum) {
       this.web3Provider = window.ethereum;
       try {
@@ -144,7 +137,6 @@ export default class ElectionLobby extends React.Component {
         await window.ethereum.enable();
       } catch (error) {
         // User denied account access...
-        // TODO: Beter error handling
         console.error('User denied account access');
       }
     } else if (window.web3) {
@@ -152,7 +144,6 @@ export default class ElectionLobby extends React.Component {
       this.web3Provider = window.web3.currentProvider;
     } else {
       // If no injected web3 instance is detected, fall back to Ganache
-      // TODO: This should be removed from production code
       this.web3Provider = new Web3.providers.HttpProvider('http://localhost:8545');
     }
     this.web3 = new Web3(this.web3Provider);

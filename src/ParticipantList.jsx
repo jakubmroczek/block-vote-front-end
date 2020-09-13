@@ -330,13 +330,11 @@ export default class ParticipantList extends React.Component {
         <Card.Header as="h5">Participants</Card.Header>
         <Card.Body>
           <ParticipantTable participants={participants} update={this.update} remove={this.remove} />
-          {/* TODO: Create a reusable component */}
           <OverlayTrigger
             placement="top"
             delay={{ show: 250 }}
             overlay={renderAddTooltip}
           >
-            {/* Wyswietl modal */}
             <Button onClick={this.showParticipantAddModal} variant="secondary">
               <FontAwesomeIcon icon={faPlus} />
             </Button>

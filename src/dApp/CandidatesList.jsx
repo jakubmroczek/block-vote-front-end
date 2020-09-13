@@ -28,7 +28,6 @@ export default class CandidatesList extends React.Component {
   constructor(props) {
     super(props);
 
-    // -1 should be a constant.
     this.state = {
       selectedCandidate: null,
     };
@@ -41,11 +40,8 @@ export default class CandidatesList extends React.Component {
     const { selectedCandidate } = this.state;
     const { electionID } = this.props;
 
-    // TODO: should it be comparet in this way?
     if (selectedCandidate !== null) {
-      // TODO: Should this logic be here?
-      // I must get candidateId somehow
-      // TODO: Catch error
+      
       new ElectionAPI()
         .vote(electionID, selectedCandidate)
         .then(() => {

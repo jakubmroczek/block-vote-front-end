@@ -76,7 +76,6 @@ export default class DApp extends React.Component {
 
     const { isMetaMaskInstalled } = this.state;
 
-    // TODO: More detailed error log.
     if (!isMetaMaskInstalled) {
       return (
         <Card className="text-center mt-2 mr-3">

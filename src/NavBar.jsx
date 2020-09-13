@@ -161,7 +161,6 @@ export default class NavBar extends React.Component {
     return (
       <>
         <Navbar bg="light" expand="lg">
-          {/* TODO: Extract this to distint function */}
           <Navbar.Brand>
             <img
               src="/logo.svg"

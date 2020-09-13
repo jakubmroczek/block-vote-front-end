@@ -37,7 +37,6 @@ export default function RegisterPublicKeyPanel(props) {
     if (!isValidPublicKey()) {
       alert('Public key is illformatted');
       return;
-      // TODO: Pass some info to the text label so it indicate the error
     }
 
     const form = document.forms.registerPublicKey;
